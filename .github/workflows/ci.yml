@@ -18,7 +18,7 @@ jobs:
           dotnet-version: 10.0.x
       - name: Build
         run: dotnet build backend --nologo -v q
-      - name: Test (Testcontainers: PostgreSQL, Pebble ACME)
+      - name: Test (Testcontainers with PostgreSQL and Pebble ACME)
         run: dotnet test backend/MX.Tests --no-build --nologo -v q
 
   frontend:
