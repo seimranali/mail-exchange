@@ -1,0 +1,218 @@
+/* Page-level layout helpers shared by route components. */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mx-spacing-4);
+}
+
+.section + .section {
+  margin-top: var(--mx-spacing-8);
+}
+
+.sectionTitle {
+  font-size: var(--mx-font-size-lg);
+}
+
+.toolbarSearch {
+  flex: 1 1 240px;
+  max-width: 360px;
+}
+
+.toolbarFilter {
+  flex: 0 1 180px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: var(--mx-spacing-4);
+}
+
+.formStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mx-spacing-4);
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--mx-spacing-2);
+}
+
+.inlineGroup {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--mx-spacing-2);
+}
+
+.inlineGroup > :first-child {
+  flex: 1;
+}
+
+.suffixText {
+  padding: 0 var(--mx-spacing-2);
+  color: var(--mx-color-text-muted);
+  white-space: nowrap;
+}
+
+.cellStack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.identityCell {
+  display: flex;
+  align-items: center;
+  gap: var(--mx-spacing-3);
+  min-width: 0;
+}
+
+.cellPrimary {
+  font-weight: var(--mx-font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.cellSecondary {
+  color: var(--mx-color-text-muted);
+  font-size: var(--mx-font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.usageCell {
+  min-width: 140px;
+}
+
+.muted {
+  color: var(--mx-color-text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mx-spacing-3);
+}
+
+.alertBanner {
+  display: flex;
+  gap: var(--mx-spacing-3);
+  padding: var(--mx-spacing-3) var(--mx-spacing-4);
+  border: var(--mx-border-width) solid var(--mx-color-danger-border);
+  border-radius: var(--mx-radius-medium);
+  background: var(--mx-color-danger-subtle);
+  color: var(--mx-color-danger);
+}
+
+/* ---- Login ----------------------------------------------------------- */
+.loginPage {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.loginAside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--mx-spacing-12);
+  background: var(--mx-color-sidebar-bg);
+  color: var(--mx-slate-300);
+}
+
+.loginBrand {
+  display: flex;
+  align-items: center;
+  gap: var(--mx-spacing-3);
+  color: #fff;
+  font-size: var(--mx-font-size-xl);
+  font-weight: var(--mx-font-weight-bold);
+}
+
+.loginPitch h2 {
+  max-width: 18ch;
+  color: #fff;
+  font-size: var(--mx-font-size-3xl);
+}
+
+.loginPitch ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mx-spacing-3);
+  margin-top: var(--mx-spacing-6);
+  padding: 0;
+  list-style: none;
+}
+
+.loginPitch li {
+  display: flex;
+  align-items: center;
+  gap: var(--mx-spacing-3);
+}
+
+.loginPitch li svg {
+  color: var(--mx-blue-300);
+}
+
+.loginMain {
+  display: grid;
+  place-items: center;
+  padding: var(--mx-spacing-6);
+}
+
+.loginCard {
+  width: min(400px, 100%);
+}
+
+.loginCard h1 {
+  font-size: var(--mx-font-size-2xl);
+}
+
+.loginCard > p {
+  margin: var(--mx-spacing-1) 0 var(--mx-spacing-6);
+  color: var(--mx-color-text-muted);
+}
+
+.loginCard > p.loginSwitch {
+  margin: var(--mx-spacing-6) 0 0;
+  font-size: var(--mx-font-size-sm);
+  text-align: center;
+}
+
+.loginSwitch a {
+  color: var(--mx-color-text-link);
+  font-weight: var(--mx-font-weight-medium);
+}
+
+@media (max-width: 899px) {
+  .loginPage {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .loginAside {
+    display: none;
+  }
+}
+
+.settingsList {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--mx-spacing-1) var(--mx-spacing-4);
+  padding: var(--mx-spacing-3);
+  border-radius: var(--mx-radius-medium);
+  background: var(--mx-color-surface-sunken);
+  font-size: var(--mx-font-size-sm);
+}
+
+.settingsList dt {
+  color: var(--mx-color-text-muted);
+  font-weight: var(--mx-font-weight-semibold);
+}
+
+.settingsList dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

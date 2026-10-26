@@ -1,0 +1,10 @@
+[Unit]
+Description=MX nightly backup (PostgreSQL dump + message store)
+After=postgresql.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/mx/backup.env
+ExecStart=/opt/mx/current/scripts/backup-all.sh
+Nice=10
+IOSchedulingClass=idle

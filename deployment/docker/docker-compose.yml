@@ -1,0 +1,26 @@
+# Local development stack. Not for production use: credentials below are development defaults.
+name: mx
+
+services:
+  postgres:
+    image: postgres:17.6
+    environment:
+      POSTGRES_DB: mx
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_dev
+      MX_OWNER_PASSWORD: mx_owner_dev
+      MX_APP_PASSWORD: mx_app_dev
+      MX_BACKUP_PASSWORD: mx_backup_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - mx-pgdata:/var/lib/postgresql/data
+      - ../../database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mx"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  mx-pgdata:

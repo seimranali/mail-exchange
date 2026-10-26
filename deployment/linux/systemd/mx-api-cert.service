@@ -1,0 +1,8 @@
+[Unit]
+Description=Restart the MX API to load a new TLS certificate
+
+[Service]
+Type=oneshot
+# Short delay so the certificate file is fully written before Kestrel reads it.
+ExecStartPre=/bin/sleep 2
+ExecStart=/bin/systemctl restart mx-api.service

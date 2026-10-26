@@ -1,0 +1,4 @@
+* text=auto
+# Shell scripts run inside Linux containers and hosts: must keep LF.
+*.sh text eol=lf
+*.ps1 text eol=crlf

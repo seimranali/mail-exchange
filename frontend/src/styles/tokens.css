@@ -1,0 +1,139 @@
+/*
+ * MX design tokens.
+ * Primitive scales first, then semantic tokens (in themes.css) that components consume.
+ * Components must only reference semantic tokens, never primitives or raw values.
+ */
+:root {
+  /* ---- Primitive palette ---------------------------------------------- */
+  --mx-blue-50: #eff6ff;
+  --mx-blue-100: #dbeafe;
+  --mx-blue-200: #bfdbfe;
+  --mx-blue-300: #93c5fd;
+  --mx-blue-400: #60a5fa;
+  --mx-blue-500: #3b82f6;
+  --mx-blue-600: #2563eb;
+  --mx-blue-700: #1d4ed8;
+  --mx-blue-800: #1e40af;
+  --mx-blue-900: #1e3a8a;
+
+  --mx-slate-0: #ffffff;
+  --mx-slate-25: #fbfcfe;
+  --mx-slate-50: #f8fafc;
+  --mx-slate-100: #f1f5f9;
+  --mx-slate-150: #e9eef4;
+  --mx-slate-200: #dbe2ea;
+  --mx-slate-300: #c3cdd9;
+  --mx-slate-400: #94a3b8;
+  --mx-slate-500: #64748b;
+  --mx-slate-600: #475569;
+  --mx-slate-700: #334155;
+  --mx-slate-750: #273244;
+  --mx-slate-800: #1e293b;
+  --mx-slate-850: #172033;
+  --mx-slate-900: #111827;
+  --mx-slate-950: #0b1120;
+
+  --mx-green-50: #f0fdf4;
+  --mx-green-100: #dcfce7;
+  --mx-green-400: #4ade80;
+  --mx-green-600: #16a34a;
+  --mx-green-700: #15803d;
+  --mx-green-900: #14532d;
+
+  --mx-amber-50: #fffbeb;
+  --mx-amber-100: #fef3c7;
+  --mx-amber-400: #fbbf24;
+  --mx-amber-700: #b45309;
+  --mx-amber-900: #78350f;
+
+  --mx-red-50: #fef2f2;
+  --mx-red-100: #fee2e2;
+  --mx-red-400: #f87171;
+  --mx-red-600: #dc2626;
+  --mx-red-700: #b91c1c;
+  --mx-red-900: #7f1d1d;
+
+  --mx-violet-100: #ede9fe;
+  --mx-violet-400: #a78bfa;
+  --mx-violet-700: #6d28d9;
+  --mx-violet-900: #4c1d95;
+
+  /* ---- Typography ------------------------------------------------------ */
+  --mx-font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --mx-font-family-mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
+  --mx-font-size-xs: 0.75rem;   /* 12 */
+  --mx-font-size-sm: 0.8125rem; /* 13 */
+  --mx-font-size-md: 0.875rem;  /* 14 - base UI size */
+  --mx-font-size-lg: 1rem;      /* 16 */
+  --mx-font-size-xl: 1.25rem;   /* 20 */
+  --mx-font-size-2xl: 1.5rem;   /* 24 */
+  --mx-font-size-3xl: 1.875rem; /* 30 */
+
+  --mx-font-weight-regular: 400;
+  --mx-font-weight-medium: 500;
+  --mx-font-weight-semibold: 600;
+  --mx-font-weight-bold: 700;
+
+  --mx-line-height-tight: 1.25;
+  --mx-line-height-normal: 1.5;
+
+  /* ---- Spacing (4px grid) ---------------------------------------------- */
+  --mx-spacing-0: 0;
+  --mx-spacing-1: 4px;
+  --mx-spacing-2: 8px;
+  --mx-spacing-3: 12px;
+  --mx-spacing-4: 16px;
+  --mx-spacing-5: 20px;
+  --mx-spacing-6: 24px;
+  --mx-spacing-8: 32px;
+  --mx-spacing-10: 40px;
+  --mx-spacing-12: 48px;
+  --mx-spacing-16: 64px;
+
+  /* ---- Shape ----------------------------------------------------------- */
+  --mx-radius-small: 4px;
+  --mx-radius-medium: 8px;
+  --mx-radius-large: 12px;
+  --mx-radius-pill: 999px;
+
+  --mx-border-width: 1px;
+  --mx-focus-ring-width: 3px;
+
+  /* ---- Sizing ---------------------------------------------------------- */
+  --mx-control-height-sm: 30px;
+  --mx-control-height-md: 36px;
+  --mx-control-height-lg: 44px;
+  --mx-sidebar-width: 248px;
+  --mx-sidebar-width-collapsed: 64px;
+  --mx-topbar-height: 56px;
+  --mx-content-max-width: 1440px;
+  --mx-drawer-width: 480px;
+
+  /* ---- Elevation ------------------------------------------------------- */
+  --mx-z-dropdown: 100;
+  --mx-z-sticky: 200;
+  --mx-z-drawer: 300;
+  --mx-z-modal: 400;
+  --mx-z-toast: 500;
+  --mx-z-tooltip: 600;
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --mx-duration-fast: 120ms;
+  --mx-duration-normal: 200ms;
+  --mx-duration-slow: 320ms;
+  --mx-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --mx-easing-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ---- Breakpoints (reference only: CSS vars can't be used in media queries)
+   * sm 640px · md 768px · lg 1024px · xl 1280px
+   */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --mx-duration-fast: 0ms;
+    --mx-duration-normal: 0ms;
+    --mx-duration-slow: 0ms;
+  }
+}

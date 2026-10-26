@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+
+# Local data / secrets
+backups/
+*.env
+.env.*
+appsettings.*.local.json
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+
+# Native mail server message store (local development)
+mailstore/
+
+# Release builds
+release/

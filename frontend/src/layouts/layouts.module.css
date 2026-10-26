@@ -1,0 +1,130 @@
+.app {
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-left: var(--mx-sidebar-width);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--mx-spacing-6);
+}
+
+.content:focus {
+  outline: none;
+}
+
+.scrim {
+  position: fixed;
+  z-index: calc(var(--mx-z-drawer) - 1);
+  inset: 0;
+  background: var(--mx-color-overlay);
+}
+
+@media (max-width: 1023px) {
+  .main {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .content {
+    padding: var(--mx-spacing-4);
+  }
+}
+
+/* ---- Page header ----------------------------------------------------- */
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mx-spacing-2);
+  margin-bottom: var(--mx-spacing-6);
+}
+
+.pageHeaderRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--mx-spacing-4);
+}
+
+.pageHeading {
+  min-width: 0;
+}
+
+.pageTitle {
+  font-size: var(--mx-font-size-2xl);
+  font-weight: var(--mx-font-weight-bold);
+}
+
+.pageDescription {
+  margin-top: var(--mx-spacing-1);
+  max-width: 72ch;
+  color: var(--mx-color-text-muted);
+}
+
+.pageActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mx-spacing-2);
+}
+
+/* ---- Containers ------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--mx-content-max-width);
+  margin: 0 auto;
+}
+
+.narrow {
+  max-width: 880px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min), 100%), 1fr));
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.gapSM {
+  gap: var(--mx-spacing-3);
+}
+
+.gapMD {
+  gap: var(--mx-spacing-4);
+}
+
+.gapLG {
+  gap: var(--mx-spacing-6);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--split-secondary);
+  gap: var(--mx-spacing-4);
+  align-items: start;
+}
+
+.splitPrimary,
+.splitSecondary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mx-spacing-4);
+  min-width: 0;
+}
+
+@media (max-width: 1023px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

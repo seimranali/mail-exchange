@@ -1,0 +1,107 @@
+.button {
+  --btn-bg: var(--mx-color-surface);
+  --btn-bg-hover: var(--mx-color-surface-hover);
+  --btn-fg: var(--mx-color-text);
+  --btn-border: var(--mx-color-border-strong);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mx-spacing-2);
+  height: var(--mx-control-height-md);
+  padding: 0 var(--mx-spacing-4);
+  border: var(--mx-border-width) solid var(--btn-border);
+  border-radius: var(--mx-radius-medium);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--mx-font-size-md);
+  font-weight: var(--mx-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background var(--mx-duration-fast) var(--mx-easing-standard),
+    border-color var(--mx-duration-fast) var(--mx-easing-standard),
+    box-shadow var(--mx-duration-fast) var(--mx-easing-standard);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--btn-bg-hover);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--mx-focus-ring-width) var(--mx-color-focus-ring);
+}
+
+.button:disabled {
+  opacity: 0.55;
+}
+
+.primary {
+  --btn-bg: var(--mx-color-primary);
+  --btn-bg-hover: var(--mx-color-primary-hover);
+  --btn-fg: var(--mx-color-on-primary);
+  --btn-border: transparent;
+}
+
+.danger {
+  --btn-bg: var(--mx-color-danger);
+  --btn-bg-hover: var(--mx-color-danger-hover);
+  --btn-fg: var(--mx-color-text-inverse);
+  --btn-border: transparent;
+}
+
+.ghost {
+  --btn-bg: transparent;
+  --btn-border: transparent;
+}
+
+.subtle {
+  --btn-bg: var(--mx-color-primary-subtle);
+  --btn-bg-hover: var(--mx-color-surface-selected);
+  --btn-fg: var(--mx-color-primary);
+  --btn-border: var(--mx-color-primary-subtle-border);
+}
+
+.sm {
+  height: var(--mx-control-height-sm);
+  padding: 0 var(--mx-spacing-3);
+  font-size: var(--mx-font-size-sm);
+}
+
+.lg {
+  height: var(--mx-control-height-lg);
+  padding: 0 var(--mx-spacing-6);
+  font-size: var(--mx-font-size-lg);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.iconOnly {
+  width: var(--mx-control-height-md);
+  padding: 0;
+}
+
+.iconOnly.sm {
+  width: var(--mx-control-height-sm);
+}
+
+.loading .content {
+  visibility: hidden;
+}
+
+.spinnerOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mx-spacing-2);
+}

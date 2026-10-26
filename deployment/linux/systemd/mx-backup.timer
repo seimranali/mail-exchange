@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the MX backup nightly
+
+[Timer]
+OnCalendar=*-*-* 02:15:00
+RandomizedDelaySec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

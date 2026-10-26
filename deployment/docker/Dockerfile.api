@@ -1,0 +1,13 @@
+# Build from the repository root:  docker build -f deployment/docker/Dockerfile.api -t mx-api .
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY backend/ .
+RUN dotnet publish MX.Api/MX.Api.csproj -c Release -o /out --nologo
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+WORKDIR /app
+COPY --from=build /out .
+USER $APP_UID
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "MX.Api.dll"]

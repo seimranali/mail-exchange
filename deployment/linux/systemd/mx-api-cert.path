@@ -1,0 +1,9 @@
+[Unit]
+Description=Restart the MX API when the TLS certificate is issued or renewed
+
+[Path]
+PathChanged=/var/lib/mx/tls/mail.pfx
+Unit=mx-api-cert.service
+
+[Install]
+WantedBy=multi-user.target

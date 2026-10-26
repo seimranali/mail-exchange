@@ -1,0 +1,44 @@
+[Unit]
+Description=MX admin API and web interface
+After=network-online.target postgresql.service mx-mailhost.service
+Wants=network-online.target
+Requires=postgresql.service
+# Dedicated mode adds a drop-in (tls.conf) requiring the ACME certificate; shared mode sits behind nginx.
+
+[Service]
+Type=simple
+User=mx
+Group=mx
+WorkingDirectory=/opt/mx/current/api
+EnvironmentFile=/etc/mx/common.env
+EnvironmentFile=/etc/mx/api.env
+ExecStart=/opt/mx/current/api/MX.Api
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/mx
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+SystemCallArchitectures=native
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,183 @@
+/*
+ * Semantic theme tokens. Light is the default; dark applies when the OS prefers it
+ * (unless the user forced light) or when the user explicitly chose dark.
+ * All text/background pairs below meet WCAG 2.2 AA contrast (4.5:1 for text).
+ */
+:root {
+  --mx-color-primary: var(--mx-blue-600);
+  --mx-color-primary-hover: var(--mx-blue-700);
+  --mx-color-primary-active: var(--mx-blue-800);
+  --mx-color-primary-subtle: var(--mx-blue-50);
+  --mx-color-primary-subtle-border: var(--mx-blue-200);
+  --mx-color-on-primary: #ffffff;
+
+  --mx-color-background: var(--mx-slate-50);
+  --mx-color-surface: var(--mx-slate-0);
+  --mx-color-surface-raised: var(--mx-slate-0);
+  --mx-color-surface-sunken: var(--mx-slate-100);
+  --mx-color-surface-hover: var(--mx-slate-100);
+  --mx-color-surface-selected: var(--mx-blue-50);
+  --mx-color-overlay: rgb(15 23 42 / 0.5);
+
+  --mx-color-text: var(--mx-slate-850);
+  --mx-color-text-muted: var(--mx-slate-600);
+  --mx-color-text-subtle: var(--mx-slate-500);
+  --mx-color-text-disabled: var(--mx-slate-400);
+  --mx-color-text-link: var(--mx-blue-700);
+  --mx-color-text-inverse: #ffffff;
+
+  --mx-color-border: var(--mx-slate-200);
+  --mx-color-border-strong: var(--mx-slate-300);
+  --mx-color-border-input: var(--mx-slate-400);
+  --mx-color-focus-ring: rgb(37 99 235 / 0.45);
+
+  --mx-color-success: var(--mx-green-700);
+  --mx-color-success-subtle: var(--mx-green-50);
+  --mx-color-success-border: var(--mx-green-100);
+  --mx-color-warning: var(--mx-amber-700);
+  --mx-color-warning-subtle: var(--mx-amber-50);
+  --mx-color-warning-border: var(--mx-amber-100);
+  --mx-color-danger: var(--mx-red-700);
+  --mx-color-danger-hover: var(--mx-red-900);
+  --mx-color-danger-subtle: var(--mx-red-50);
+  --mx-color-danger-border: var(--mx-red-100);
+  --mx-color-info: var(--mx-blue-700);
+  --mx-color-info-subtle: var(--mx-blue-50);
+  --mx-color-info-border: var(--mx-blue-100);
+  --mx-color-neutral: var(--mx-slate-600);
+  --mx-color-neutral-subtle: var(--mx-slate-100);
+  --mx-color-neutral-border: var(--mx-slate-200);
+  --mx-color-accent: var(--mx-violet-700);
+  --mx-color-accent-subtle: var(--mx-violet-100);
+
+  --mx-color-sidebar-bg: var(--mx-slate-850);
+  --mx-color-sidebar-text: var(--mx-slate-300);
+  --mx-color-sidebar-text-active: #ffffff;
+  --mx-color-sidebar-item-hover: rgb(255 255 255 / 0.06);
+  --mx-color-sidebar-item-active: rgb(255 255 255 / 0.1);
+  --mx-color-sidebar-border: rgb(255 255 255 / 0.08);
+
+  --mx-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --mx-shadow-md: 0 2px 8px rgb(15 23 42 / 0.08), 0 1px 2px rgb(15 23 42 / 0.06);
+  --mx-shadow-lg: 0 12px 32px rgb(15 23 42 / 0.16), 0 2px 6px rgb(15 23 42 / 0.08);
+
+  color-scheme: light;
+}
+
+/* Dark: OS preference, unless the user explicitly picked light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --mx-color-primary: var(--mx-blue-400);
+    --mx-color-primary-hover: var(--mx-blue-300);
+    --mx-color-primary-active: var(--mx-blue-200);
+    --mx-color-primary-subtle: rgb(59 130 246 / 0.14);
+    --mx-color-primary-subtle-border: rgb(96 165 250 / 0.35);
+    --mx-color-on-primary: var(--mx-slate-950);
+
+    --mx-color-background: var(--mx-slate-950);
+    --mx-color-surface: var(--mx-slate-900);
+    --mx-color-surface-raised: var(--mx-slate-850);
+    --mx-color-surface-sunken: #0d1424;
+    --mx-color-surface-hover: var(--mx-slate-800);
+    --mx-color-surface-selected: rgb(59 130 246 / 0.16);
+    --mx-color-overlay: rgb(0 0 0 / 0.6);
+
+    --mx-color-text: var(--mx-slate-100);
+    --mx-color-text-muted: var(--mx-slate-400);
+    --mx-color-text-subtle: var(--mx-slate-400);
+    --mx-color-text-disabled: var(--mx-slate-600);
+    --mx-color-text-link: var(--mx-blue-300);
+    --mx-color-text-inverse: var(--mx-slate-950);
+
+    --mx-color-border: var(--mx-slate-750);
+    --mx-color-border-strong: var(--mx-slate-700);
+    --mx-color-border-input: var(--mx-slate-500);
+    --mx-color-focus-ring: rgb(96 165 250 / 0.55);
+
+    --mx-color-success: var(--mx-green-400);
+    --mx-color-success-subtle: rgb(74 222 128 / 0.1);
+    --mx-color-success-border: rgb(74 222 128 / 0.25);
+    --mx-color-warning: var(--mx-amber-400);
+    --mx-color-warning-subtle: rgb(251 191 36 / 0.1);
+    --mx-color-warning-border: rgb(251 191 36 / 0.25);
+    --mx-color-danger: var(--mx-red-400);
+    --mx-color-danger-hover: var(--mx-red-100);
+    --mx-color-danger-subtle: rgb(248 113 113 / 0.1);
+    --mx-color-danger-border: rgb(248 113 113 / 0.28);
+    --mx-color-info: var(--mx-blue-300);
+    --mx-color-info-subtle: rgb(96 165 250 / 0.1);
+    --mx-color-info-border: rgb(96 165 250 / 0.25);
+    --mx-color-neutral: var(--mx-slate-300);
+    --mx-color-neutral-subtle: rgb(148 163 184 / 0.1);
+    --mx-color-neutral-border: rgb(148 163 184 / 0.22);
+    --mx-color-accent: var(--mx-violet-400);
+    --mx-color-accent-subtle: rgb(167 139 250 / 0.12);
+
+    --mx-color-sidebar-bg: #0d1424;
+    --mx-color-sidebar-border: var(--mx-slate-800);
+
+    --mx-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --mx-shadow-md: 0 2px 8px rgb(0 0 0 / 0.45);
+    --mx-shadow-lg: 0 12px 32px rgb(0 0 0 / 0.55);
+
+    color-scheme: dark;
+  }
+}
+
+/* Dark: explicit user choice. Duplicates the block above (CSS cannot share it). */
+:root[data-theme='dark'] {
+  --mx-color-primary: var(--mx-blue-400);
+  --mx-color-primary-hover: var(--mx-blue-300);
+  --mx-color-primary-active: var(--mx-blue-200);
+  --mx-color-primary-subtle: rgb(59 130 246 / 0.14);
+  --mx-color-primary-subtle-border: rgb(96 165 250 / 0.35);
+  --mx-color-on-primary: var(--mx-slate-950);
+
+  --mx-color-background: var(--mx-slate-950);
+  --mx-color-surface: var(--mx-slate-900);
+  --mx-color-surface-raised: var(--mx-slate-850);
+  --mx-color-surface-sunken: #0d1424;
+  --mx-color-surface-hover: var(--mx-slate-800);
+  --mx-color-surface-selected: rgb(59 130 246 / 0.16);
+  --mx-color-overlay: rgb(0 0 0 / 0.6);
+
+  --mx-color-text: var(--mx-slate-100);
+  --mx-color-text-muted: var(--mx-slate-400);
+  --mx-color-text-subtle: var(--mx-slate-400);
+  --mx-color-text-disabled: var(--mx-slate-600);
+  --mx-color-text-link: var(--mx-blue-300);
+  --mx-color-text-inverse: var(--mx-slate-950);
+
+  --mx-color-border: var(--mx-slate-750);
+  --mx-color-border-strong: var(--mx-slate-700);
+  --mx-color-border-input: var(--mx-slate-500);
+  --mx-color-focus-ring: rgb(96 165 250 / 0.55);
+
+  --mx-color-success: var(--mx-green-400);
+  --mx-color-success-subtle: rgb(74 222 128 / 0.1);
+  --mx-color-success-border: rgb(74 222 128 / 0.25);
+  --mx-color-warning: var(--mx-amber-400);
+  --mx-color-warning-subtle: rgb(251 191 36 / 0.1);
+  --mx-color-warning-border: rgb(251 191 36 / 0.25);
+  --mx-color-danger: var(--mx-red-400);
+  --mx-color-danger-hover: var(--mx-red-100);
+  --mx-color-danger-subtle: rgb(248 113 113 / 0.1);
+  --mx-color-danger-border: rgb(248 113 113 / 0.28);
+  --mx-color-info: var(--mx-blue-300);
+  --mx-color-info-subtle: rgb(96 165 250 / 0.1);
+  --mx-color-info-border: rgb(96 165 250 / 0.25);
+  --mx-color-neutral: var(--mx-slate-300);
+  --mx-color-neutral-subtle: rgb(148 163 184 / 0.1);
+  --mx-color-neutral-border: rgb(148 163 184 / 0.22);
+  --mx-color-accent: var(--mx-violet-400);
+  --mx-color-accent-subtle: rgb(167 139 250 / 0.12);
+
+  --mx-color-sidebar-bg: #0d1424;
+  --mx-color-sidebar-border: var(--mx-slate-800);
+
+  --mx-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --mx-shadow-md: 0 2px 8px rgb(0 0 0 / 0.45);
+  --mx-shadow-lg: 0 12px 32px rgb(0 0 0 / 0.55);
+
+  color-scheme: dark;
+}

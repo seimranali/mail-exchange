@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-MX.Workers-d935f16b-7f43-404d-b6b0-e000a0dc9b3c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="10.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MX.Application\MX.Application.csproj" />
+    <ProjectReference Include="..\MX.Persistence\MX.Persistence.csproj" />
+    <ProjectReference Include="..\MX.Infrastructure\MX.Infrastructure.csproj" />
+    <ProjectReference Include="..\MX.MailIntegration\MX.MailIntegration.csproj" />
+    <ProjectReference Include="..\MX.Compliance\MX.Compliance.csproj" />
+    <ProjectReference Include="..\MX.Security\MX.Security.csproj" />
+    <ProjectReference Include="..\MX.MailServer\MX.MailServer.csproj" />
+  </ItemGroup>
+</Project>

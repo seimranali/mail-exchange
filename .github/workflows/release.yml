@@ -1,0 +1,144 @@
+name: Release
+
+# Push a tag like v1.2.0: build every platform, test-install on Linux, Windows and macOS,
+# then publish the packages and SHA256SUMS.txt as a GitHub release.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to build (no "v"); publishes nothing when run manually
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: version
+        run: |
+          v="${{ github.event.inputs.version }}"
+          [ -n "$v" ] || v="${GITHUB_REF_NAME#v}"
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Test
+        run: dotnet test backend/MX.Tests --nologo -v q
+      - name: Build packages
+        shell: pwsh
+        run: ./deployment/build-release.ps1 -Version ${{ steps.version.outputs.version }}
+      - name: Checksums
+        working-directory: release
+        run: sha256sum mx-* > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: |
+            release/mx-*
+            release/SHA256SUMS.txt
+          retention-days: 7
+
+  smoke-test:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            rid: linux-x64
+          - os: windows-2022
+            rid: win-x64
+          - os: macos-14
+            rid: osx-arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: packages
+          path: packages
+
+      - name: Install (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          pkg=$(ls packages/mx-*-${{ matrix.rid }}.tar.gz)
+          sudo pwsh ./install.ps1 -Package "$pkg" -Domain mail.example.test -Email admin@example.test -Staging
+
+      - name: Install (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell   # Windows PowerShell 5.1: the oldest shell the installer supports
+        run: |
+          # The runner image ships PostgreSQL (superuser postgres / root), stopped.
+          Get-Service postgresql* | Set-Service -StartupType Manual -PassThru | Start-Service
+          $pkg = (Get-ChildItem packages -Filter "mx-*-${{ matrix.rid }}.zip").FullName
+          ./install.ps1 -Package $pkg -Domain mail.example.test -Email admin@example.test -Staging -PostgresPassword root
+
+      - name: Install (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          pkg=$(ls packages/mx-*-${{ matrix.rid }}.tar.gz)
+          sudo pwsh ./install.ps1 -Package "$pkg" -Domain mail.example.test -Email admin@example.test -Staging
+
+      - name: Mail server answers (SMTP 25, IMAP 143)
+        shell: pwsh
+        run: |
+          function Read-Banner([int] $Port) {
+            $deadline = (Get-Date).AddSeconds(60)
+            while ($true) {
+              try {
+                $client = [Net.Sockets.TcpClient]::new('127.0.0.1', $Port)
+                $client.ReceiveTimeout = 10000
+                $line = [IO.StreamReader]::new($client.GetStream()).ReadLine()
+                $client.Dispose()
+                return $line
+              }
+              catch { if ((Get-Date) -gt $deadline) { throw "Nothing listening on port ${Port}: $_" }; Start-Sleep 3 }
+            }
+          }
+          $smtp = Read-Banner 25; Write-Host "SMTP: $smtp"; if ($smtp -notlike '220 *') { throw "unexpected SMTP banner" }
+          $imap = Read-Banner 143; Write-Host "IMAP: $imap"; if ($imap -notlike '* OK*') { throw "unexpected IMAP banner" }
+
+      - name: Upgrade in place (re-run keeps secrets)
+        shell: pwsh
+        run: |
+          $pkg = (Get-ChildItem packages -Filter "mx-*-${{ matrix.rid }}.*" | Where-Object Name -notlike '*.txt').FullName
+          if ($IsWindows) { ./install.ps1 -Package $pkg }
+          else { sudo pwsh ./install.ps1 -Package $pkg; if ($LASTEXITCODE) { exit $LASTEXITCODE } }
+
+      - name: Diagnostics
+        if: failure()
+        shell: pwsh
+        run: |
+          if ($IsLinux) { sudo journalctl -u mx-mailhost -u mx-api -u mx-workers --no-pager -n 200 }
+          elseif ($IsMacOS) { sudo sh -c 'tail -n 200 /var/log/mx/*.log' }
+          else {
+            Get-Service mx-* | Format-Table -AutoSize
+            Get-WinEvent -LogName Application -MaxEvents 80 | Where-Object { $_.ProviderName -like 'mx*' -or $_.ProviderName -like '.NET*' } | Format-List TimeCreated, ProviderName, Message
+          }
+
+  publish:
+    needs: [build, smoke-test]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: packages
+          path: packages
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" packages/* --repo "${GITHUB_REPOSITORY}" --title "MX ${{ needs.build.outputs.version }}" --generate-notes

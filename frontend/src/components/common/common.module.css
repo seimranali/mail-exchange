@@ -1,0 +1,84 @@
+/* ---- Spinner --------------------------------------------------------- */
+.spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+  opacity: 0.8;
+}
+
+.spinnerSm {
+  width: 14px;
+  height: 14px;
+}
+
+.spinnerMd {
+  width: 20px;
+  height: 20px;
+}
+
+.spinnerLg {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Card ------------------------------------------------------------ */
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--mx-color-surface);
+  border: var(--mx-border-width) solid var(--mx-color-border);
+  border-radius: var(--mx-radius-large);
+  box-shadow: var(--mx-shadow-sm);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--mx-spacing-3);
+  padding: var(--mx-spacing-4) var(--mx-spacing-5);
+  border-bottom: var(--mx-border-width) solid var(--mx-color-border);
+}
+
+.cardHeading {
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: var(--mx-font-size-lg);
+}
+
+.cardDescription {
+  margin-top: var(--mx-spacing-1);
+  color: var(--mx-color-text-muted);
+  font-size: var(--mx-font-size-sm);
+}
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mx-spacing-2);
+}
+
+.cardBody {
+  padding: var(--mx-spacing-5);
+}
+
+.cardFooter {
+  padding: var(--mx-spacing-3) var(--mx-spacing-5);
+  border-top: var(--mx-border-width) solid var(--mx-color-border);
+  background: var(--mx-color-surface-sunken);
+  border-radius: 0 0 var(--mx-radius-large) var(--mx-radius-large);
+}
